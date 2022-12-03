@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="author" content="yinq">
+    <title>首页 - 留言板首页</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="stylesheet" type="text/css" href="./static/css/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/style.min.css">
+    <style>
+        #logo a {
+            font-size: 22px;
+            line-height: 68px;
+            white-space: nowrap;
+            color: #4d5259;
+        }
+
+        [data-logobg*='color_'] #logo a {
+            color: #fff;
+        }
+
+        @media (min-width: 1024px) {
+            .lyear-layout-sidebar.lyear-aside-open #logo a {
+                display: block;
+                width: 45px;
+                height: 68px;
+                letter-spacing: 3px;
+                margin: 0 auto;
+                overflow: hidden;
+                text-align: center;
+            }
+
+            .lyear-layout-sidebar-close .lyear-layout-sidebar:hover #logo a {
+                width: 100%;
+                margin: 0;
+                letter-spacing: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--页面loading-->
+    <div id="lyear-preloader" class="loading">
+        <div class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <img src="./static/images/loading-logo.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!--页面loading end-->
+    <div class="lyear-layout-web">
+        <div class="lyear-layout-container">
+            <!--左侧导航-->
+            <aside class="lyear-layout-sidebar">
+
+                <!-- logo -->
+                <div id="logo" class="sidebar-header">
+                    <a href="index.html">留言板</a>
+                </div>
+                <div class="lyear-layout-sidebar-scroll">
+                </div>
+
+
+                <div class="lyear-layout-sidebar-info lyear-scroll">
+                    <nav class="sidebar-main">
+                        <ul class="nav-drawer">
+                            <li class="nav-item active"> <a href="index.html"><i class="mdi mdi-home"></i>
+                                    <span>首页</span></a> </li>
+                        </ul>
+                    </nav>
+                    <div class="sidebar-footer">
+                        <p class="copyright">Copyright &copy; 2022. <a target="_blank" href="http://">test</a> All
+                            rights reserved.</p>
+                    </div>
+                </div>
+
+            </aside>
+            <!--End 左侧导航-->
+
+            <!--头部信息-->
+            <header class="lyear-layout-header">
+
+                <nav class="navbar">
+
+                    <div class="navbar-left">
+                        <div class="lyear-aside-toggler">
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                            <span class="lyear-toggler-bar"></span>
+                        </div>
+                    </div>
+
+                </nav>
+
+            </header>
+            <!--End 头部信息-->
+
+            <!--页面主要内容-->
+            <main class="lyear-layout-content">
+
+                <div class="container-fluid p-t-15">
+
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <header class="card-header">
+                                    <div class="card-title">发留言</div>
+                                </header>
+                                <div class="card-body">
+                                    <form action="#!" method="post">
+                                        <div class="form-group">
+                                            <label for="username">用户名</label>
+                                            <input type="text" class="form-control" name="username" id="user"
+                                                placeholder="请输入您的用户名">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">内容</label>
+                                            <input type="text" class="form-control" name="content" placeholder="请输入内容">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-block btn-primary" id="logins" type="button"
+                                                onclick="send()">发 送</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <header class="card-header">
+                                    <div class="card-title">留言板</div>
+                                </header>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>留言id</th>
+                                                    <th>昵称</th>
+                                                    <th>内容</th>
+                                                    <th>日期</th>
+                                                    <th>IP</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {volist name='list' id='vo'}
+                                                <tr>
+                                                    <td>{$vo.id}</td>
+                                                    <td>{$vo.username}</td>
+                                                    <td>{$vo.content}</td>
+                                                    <td>{$vo.create_time}</td>
+                                                    <td><span class="badge badge-warning">{$vo.ip}</span></td>
+                                                </tr>
+                                                {/volist}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+            <!--End 页面主要内容-->
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./static/js/popper.min.js"></script>
+    <script type="text/javascript" src="./static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="./static/js/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="./static/js/app.min.js"></script>
+    <script type="text/javascript" src="./static/js/main.min.js"></script>
+    <script type="text/javascript" src="./static/js/bootstrap-notify.min.js"></script>
+    <!--消息提示-->
+    <script type="text/javascript" src="./static/js/lyear-loading.min.js"></script>
+
+    <script>
+        function send() {
+            var l = $('body').lyearloading({
+                opacity: 0.2,
+                spinnerSize: 'lg',
+                spinnerText: '后台处理中，请稍后...',
+                textColorClass: 'text-info',
+                spinnerColorClass: 'text-info'
+            });
+            var username = $("input[name='username']").val();
+            var content = $("input[name='content']").val();
+            $.post("{:url('send')}", {
+                username, username,
+                content, content,
+            }, function (res) {
+                if (res.status == 200) {
+                    l.destroy();
+                    showNotify(res.msg, 'success');
+                    setTimeout("location.href='/admin/index'", 3000);
+                } else {
+                    l.destroy();
+                    showNotify(res.msg, 'danger');
+                }
+            }, 'json')
+        }
+    </script>
+</body>
+
+</html>
